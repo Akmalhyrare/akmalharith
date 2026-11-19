@@ -1,0 +1,1073 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akmal Harith Portfolio</title>
+  <meta name="description" content="Portfolio of Akmal Harith Bin Ibrahim — Aspiring Data Analyst with a background in Database Management, SQL/PostgreSQL, Power BI and industrial workflow automation." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            ink: { 950: '#070b16', 900: '#0f172a', 800: '#16213a', 700: '#1e2b47' },
+          },
+          keyframes: {
+            fadeUp: { '0%': { opacity: 0, transform: 'translateY(16px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            pulseDot: { '0%,100%': { opacity: 1 }, '50%': { opacity: .35 } },
+          },
+          animation: {
+            fadeUp: 'fadeUp .7s ease-out both',
+            pulseDot: 'pulseDot 2s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+  <script>
+    // Apply saved theme before paint to avoid a flash
+    window.resolveTheme = function () {
+      let saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved === 'light' || saved === 'dark') return saved;
+      const host = document.documentElement.getAttribute('data-theme');
+      if (host === 'light' || host === 'dark') return host;
+      return window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    };
+    document.documentElement.classList.add('scroll-smooth');
+    document.documentElement.classList.toggle('dark', resolveTheme() === 'dark');
+  </script>
+
+  <style>
+    /* Dark-first data-console look: navy ground, emerald/cyan data accents */
+    :root { --bg: #0f172a; --fg: #cbd5e1; --accent: #10b981; --accent-2: #06b6d4; color-scheme: dark; }
+    @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg: #f8fafc; --fg: #334155; --accent: #059669; --accent-2: #0891b2; color-scheme: light; } }
+    :root[data-theme="light"] { --bg: #f8fafc; --fg: #334155; --accent: #059669; --accent-2: #0891b2; color-scheme: light; }
+    /* The in-page toggle wins over both */
+    :root:not(.dark) { --bg: #f8fafc; --fg: #334155; --accent: #059669; --accent-2: #0891b2; color-scheme: light; }
+    :root.dark { --bg: #0f172a; --fg: #cbd5e1; --accent: #10b981; --accent-2: #06b6d4; color-scheme: dark; }
+    body { background: var(--bg); color: var(--fg); font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif; overflow-x: hidden; transition: background-color .3s, color .3s; }
+    html { scroll-padding-top: 5rem; }
+    body { -webkit-font-smoothing: antialiased; }
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(148,163,184,.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148,163,184,.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+    }
+    .reveal { transition: transform .5s ease; }
+    .gradient-text {
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .bar-fill { animation: barGrow 1.2s cubic-bezier(.2,.8,.2,1) both; transform-origin: left; }
+    @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    dialog::backdrop { background: rgba(2,6,23,.7); backdrop-filter: blur(4px); }
+    dialog[open] { animation: fadeUp .3s ease-out both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+
+
+  <!-- ========================= NAVBAR ========================= -->
+  <header id="navbar" class="fixed inset-x-0 top-0 z-50 transition-all duration-300" style="padding-top: env(safe-area-inset-top, 0px)">
+    <nav class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mt-3 flex h-14 items-center justify-between rounded-2xl border border-slate-200/70 bg-white/75 px-4 backdrop-blur-xl dark:border-white/10 dark:bg-ink-900/70">
+        <a href="#top" class="flex items-center gap-2 font-bold text-slate-900 dark:text-white">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 font-mono text-sm text-white">AH</span>
+          <span class="hidden sm:inline">Akmal Harith</span>
+        </a>
+
+        <ul class="hidden items-center gap-1 md:flex">
+          <li><a href="#about" class="nav-link rounded-lg px-3 py-2 text-sm font-medium hover:text-emerald-500 transition-colors">About</a></li>
+          <li><a href="#skills" class="nav-link rounded-lg px-3 py-2 text-sm font-medium hover:text-emerald-500 transition-colors">Skills</a></li>
+          <li><a href="#projects" class="nav-link rounded-lg px-3 py-2 text-sm font-medium hover:text-emerald-500 transition-colors">Projects</a></li>
+          <li><a href="#experience" class="nav-link rounded-lg px-3 py-2 text-sm font-medium hover:text-emerald-500 transition-colors">Experience</a></li>
+          <li><a href="#contact" class="nav-link rounded-lg px-3 py-2 text-sm font-medium hover:text-emerald-500 transition-colors">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" type="button" aria-label="Toggle light/dark mode"
+            class="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 text-slate-600 hover:border-emerald-500 hover:text-emerald-500 transition dark:border-white/10 dark:text-slate-300">
+            <!-- sun (shown in dark mode) -->
+            <svg class="hidden h-4 w-4 dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <!-- moon (shown in light mode) -->
+            <svg class="h-4 w-4 dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <a id="resumeBtn" data-resume href="#contact"
+            class="hidden sm:inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-emerald-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:brightness-110 transition">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-4-4m4 4 4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            Download Resume
+          </a>
+          <button id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"
+            class="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 md:hidden dark:border-white/10">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="mt-2 hidden rounded-2xl border border-slate-200 bg-white/95 p-3 backdrop-blur-xl md:hidden dark:border-white/10 dark:bg-ink-900/95">
+        <a href="#about" class="mobile-link block rounded-lg px-3 py-2.5 font-medium hover:bg-slate-100 dark:hover:bg-white/5">About</a>
+        <a href="#skills" class="mobile-link block rounded-lg px-3 py-2.5 font-medium hover:bg-slate-100 dark:hover:bg-white/5">Skills</a>
+        <a href="#projects" class="mobile-link block rounded-lg px-3 py-2.5 font-medium hover:bg-slate-100 dark:hover:bg-white/5">Projects</a>
+        <a href="#experience" class="mobile-link block rounded-lg px-3 py-2.5 font-medium hover:bg-slate-100 dark:hover:bg-white/5">Experience</a>
+        <a href="#contact" class="mobile-link block rounded-lg px-3 py-2.5 font-medium hover:bg-slate-100 dark:hover:bg-white/5">Contact</a>
+        <a href="#contact" data-resume class="mt-2 block rounded-lg bg-gradient-to-r from-emerald-500 to-cyan-500 px-3 py-2.5 text-center font-semibold text-white">Download Resume</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ========================= HERO ========================= -->
+    <section class="relative overflow-hidden pt-32 pb-16 sm:pt-36 lg:pb-24">
+      <div class="grid-bg pointer-events-none absolute inset-0"></div>
+      <div class="pointer-events-none absolute -top-24 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-emerald-500/20 blur-[110px] dark:bg-emerald-500/15"></div>
+      <div class="pointer-events-none absolute top-40 right-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-[100px] dark:bg-cyan-500/10"></div>
+
+      <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr]">
+        <!-- Copy -->
+        <div class="animate-fadeUp">
+          <span class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-xs font-medium text-emerald-600 dark:text-emerald-400">
+            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulseDot"></span>
+            Open to entry-level Data Analyst roles
+          </span>
+          <h1 class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.4rem] dark:text-white">
+            Turning raw databases into <span class="gradient-text">decisions teams can trust.</span>
+          </h1>
+          <p class="mt-3 font-mono text-sm text-cyan-600 dark:text-cyan-400">
+            Akmal Harith Bin Ibrahim — Aspiring Data Analyst | Database Management &amp; BI Enthusiast
+          </p>
+          <p class="mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
+            Final-year Computer Science (Database Management) student at UTeM and Industrial Trainee at
+            Honda Malaysia. I bridge the gap between database architecture and actionable business insight —
+            combining SQL/PostgreSQL, Excel/VBA automation and Power BI storytelling.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#projects" class="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 font-semibold text-white shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:brightness-110 transition">
+              Explore My Projects
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+            <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-800 hover:border-emerald-500 hover:text-emerald-600 transition dark:border-white/15 dark:text-white dark:hover:text-emerald-400">
+              Get In Touch
+            </a>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-2 font-mono text-xs">
+            <span class="rounded-md bg-slate-200/70 px-2.5 py-1 dark:bg-white/5">SELECT insight FROM data;</span>
+            <span class="rounded-md bg-slate-200/70 px-2.5 py-1 dark:bg-white/5">PostgreSQL</span>
+            <span class="rounded-md bg-slate-200/70 px-2.5 py-1 dark:bg-white/5">Power BI · DAX</span>
+            <span class="rounded-md bg-slate-200/70 px-2.5 py-1 dark:bg-white/5">Excel · VBA</span>
+          </div>
+        </div>
+
+        <!-- Analytics Sandbox -->
+        <div class="animate-fadeUp [animation-delay:.15s]">
+          <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-2xl shadow-slate-300/40 backdrop-blur dark:border-white/10 dark:bg-ink-800/80 dark:shadow-black/40">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="font-mono text-[11px] uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Analytics Sandbox</p>
+                <h2 class="mt-1 text-base font-bold text-slate-900 dark:text-white">Music Studio Utilization</h2>
+              </div>
+              <div class="flex gap-1.5">
+                <span class="h-2.5 w-2.5 rounded-full bg-rose-400/80"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-amber-400/80"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
+              </div>
+            </div>
+
+            <!-- View tabs -->
+            <div role="tablist" aria-label="Chart view" class="mt-4 grid grid-cols-3 gap-1 rounded-lg bg-slate-100 p-1 font-mono text-[11px] sm:text-xs dark:bg-ink-950/60">
+              <button role="tab" data-view="hourly" class="sandbox-tab rounded-md px-2 py-1.5 font-medium transition">Peak Hours</button>
+              <button role="tab" data-view="weekly" class="sandbox-tab rounded-md px-2 py-1.5 font-medium transition">Weekly Trend</button>
+              <button role="tab" data-view="resource" class="sandbox-tab rounded-md px-2 py-1.5 font-medium transition">Resources</button>
+            </div>
+
+            <!-- KPIs -->
+            <div class="mt-4 grid grid-cols-3 gap-2">
+              <div class="rounded-lg border border-slate-200 p-2.5 dark:border-white/10">
+                <p class="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400" id="kpi1Label">Peak slot</p>
+                <p class="mt-0.5 font-mono text-base font-semibold text-slate-900 sm:text-lg dark:text-white" id="kpi1">—</p>
+              </div>
+              <div class="rounded-lg border border-slate-200 p-2.5 dark:border-white/10">
+                <p class="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400" id="kpi2Label">Total</p>
+                <p class="mt-0.5 font-mono text-base font-semibold text-slate-900 sm:text-lg dark:text-white" id="kpi2">—</p>
+              </div>
+              <div class="rounded-lg border border-slate-200 p-2.5 dark:border-white/10">
+                <p class="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400" id="kpi3Label">Avg</p>
+                <p class="mt-0.5 font-mono text-base font-semibold text-emerald-600 sm:text-lg dark:text-emerald-400" id="kpi3">—</p>
+              </div>
+            </div>
+
+            <div class="relative mt-4 h-56 sm:h-60">
+              <canvas id="sandboxChart" aria-label="Interactive studio utilization chart" role="img"></canvas>
+            </div>
+
+            <!-- Insight + filter -->
+            <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p class="flex items-start gap-2 text-xs leading-relaxed sm:text-[13px]">
+                <span class="mt-0.5 font-mono text-cyan-600 dark:text-cyan-400">&gt;</span>
+                <span id="insightText">—</span>
+              </p>
+              <label id="weekendWrap" class="flex shrink-0 cursor-pointer items-center gap-2 font-mono text-[11px]">
+                <input id="weekendToggle" type="checkbox" class="peer sr-only" />
+                <span class="relative h-5 w-9 rounded-full bg-slate-300 transition peer-checked:bg-emerald-500 dark:bg-slate-600
+                  after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition peer-checked:after:translate-x-4"></span>
+                Weekends only
+              </label>
+            </div>
+            <p class="mt-3 border-t border-slate-200 pt-3 font-mono text-[10px] text-slate-400 dark:border-white/10 dark:text-slate-500">
+              Illustrative sample data modelled on the UTeM Music Studio project schema.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= HIGHLIGHTS ========================= -->
+    <section aria-label="Key highlights" class="border-y border-slate-200 bg-white/60 dark:border-white/5 dark:bg-ink-950/40">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-slate-200 px-4 sm:grid-cols-2 sm:divide-y-0 sm:px-6 lg:grid-cols-4 lg:divide-x dark:divide-white/5">
+        <div class="reveal flex items-center gap-4 py-6 lg:px-6 lg:first:pl-0">
+          <span class="font-mono text-3xl font-bold gradient-text">3.50+</span>
+          <p class="text-sm leading-snug"><span class="font-semibold text-slate-900 dark:text-white">CGPA</span><br />B.CS (Database Management)</p>
+        </div>
+        <div class="reveal flex items-center gap-4 py-6 lg:px-6">
+          <span class="font-mono text-3xl font-bold gradient-text">4/5</span>
+          <p class="text-sm leading-snug"><span class="font-semibold text-slate-900 dark:text-white">Dean's List</span><br />semesters during Diploma</p>
+        </div>
+        <div class="reveal flex items-center gap-4 py-6 lg:px-6">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-500/10 text-emerald-500">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg>
+          </span>
+          <p class="text-sm leading-snug"><span class="font-semibold text-slate-900 dark:text-white">Industrial Experience</span><br />Honda Malaysia Sdn. Bhd.</p>
+        </div>
+        <div class="reveal flex items-center gap-4 py-6 lg:px-6 lg:last:pr-0">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-cyan-500/10 text-cyan-500">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+          </span>
+          <p class="text-sm leading-snug"><span class="font-semibold text-slate-900 dark:text-white">End-to-End Workflow</span><br />SQL → Power BI</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= ABOUT ========================= -->
+    <section id="about" class="py-20 sm:py-24">
+      <div class="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr]">
+        <div class="reveal">
+          <p class="font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-400">About</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">From schema design to the story the data tells.</h2>
+          <!-- Pipeline visual -->
+          <div class="mt-8 rounded-2xl border border-slate-200 bg-white p-5 font-mono text-xs dark:border-white/10 dark:bg-ink-800/60">
+            <p class="mb-4 text-[10px] uppercase tracking-widest text-slate-400">my_workflow.pipeline</p>
+            <ol class="space-y-3">
+              <li class="flex items-center gap-3"><span class="grid h-7 w-7 place-items-center rounded-md bg-emerald-500/15 text-emerald-500">1</span><span><span class="text-slate-900 dark:text-white">Model</span> — normalized relational schema</span></li>
+              <li class="ml-3 h-3 border-l border-dashed border-slate-300 dark:border-white/15"></li>
+              <li class="flex items-center gap-3"><span class="grid h-7 w-7 place-items-center rounded-md bg-emerald-500/15 text-emerald-500">2</span><span><span class="text-slate-900 dark:text-white">Secure</span> — RLS policies &amp; access control</span></li>
+              <li class="ml-3 h-3 border-l border-dashed border-slate-300 dark:border-white/15"></li>
+              <li class="flex items-center gap-3"><span class="grid h-7 w-7 place-items-center rounded-md bg-cyan-500/15 text-cyan-500">3</span><span><span class="text-slate-900 dark:text-white">Query</span> — joins, aggregations, optimization</span></li>
+              <li class="ml-3 h-3 border-l border-dashed border-slate-300 dark:border-white/15"></li>
+              <li class="flex items-center gap-3"><span class="grid h-7 w-7 place-items-center rounded-md bg-cyan-500/15 text-cyan-500">4</span><span><span class="text-slate-900 dark:text-white">Visualize</span> — Power BI dashboards &amp; DAX</span></li>
+            </ol>
+          </div>
+        </div>
+        <div class="reveal space-y-5 text-base leading-relaxed sm:text-lg">
+          <p>
+            I'm <span class="font-semibold text-slate-900 dark:text-white">Akmal Harith Bin Ibrahim</span>, a final-year
+            <span class="font-semibold text-slate-900 dark:text-white">Bachelor of Computer Science (Database Management)</span> student at
+            Universiti Teknikal Malaysia Melaka (UTeM), maintaining a CGPA above 3.50. Before my degree, I earned a Diploma in
+            Computer Science and made the Dean's List in 4 out of 5 semesters.
+          </p>
+          <p>
+            Today I'm an <span class="font-semibold text-slate-900 dark:text-white">Industrial Trainee at Honda Malaysia Sdn. Bhd.</span>,
+            working with the Quality Compliance &amp; Strategic Planning (QBU OHSEMS) team. There I've seen first-hand how much time
+            manual tracking costs a team — and how much accuracy improves when reporting is automated and validated.
+          </p>
+          <p>
+            My goal is simple: <span class="gradient-text font-semibold">bridge the gap between raw database architecture and actionable business insights.</span>
+            I combine hands-on SQL/PostgreSQL expertise, industrial workflow automation and Power BI storytelling to help teams make
+            accurate, data-driven decisions.
+          </p>
+          <div class="grid gap-3 pt-2 sm:grid-cols-3">
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-white/10">
+              <p class="font-mono text-xs text-emerald-600 dark:text-emerald-400">ACCURACY</p>
+              <p class="mt-1 text-sm">Validated, error-free reporting</p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-white/10">
+              <p class="font-mono text-xs text-emerald-600 dark:text-emerald-400">CLARITY</p>
+              <p class="mt-1 text-sm">Dashboards stakeholders actually read</p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-white/10">
+              <p class="font-mono text-xs text-emerald-600 dark:text-emerald-400">EFFICIENCY</p>
+              <p class="mt-1 text-sm">Automate the repetitive work</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SKILLS ========================= -->
+    <section id="skills" class="border-t border-slate-200 bg-white/50 py-20 sm:py-24 dark:border-white/5 dark:bg-ink-950/30">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="reveal max-w-2xl">
+          <p class="font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Skills Matrix</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">The analyst's toolkit.</h2>
+          <p class="mt-3">Grouped by where each tool sits in the data lifecycle — from storage and querying to analysis and reporting.</p>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-3" id="skillsGrid"><!-- rendered by JS --></div>
+      </div>
+    </section>
+
+    <!-- ========================= PROJECTS ========================= -->
+    <section id="projects" class="py-20 sm:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="reveal flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-2xl">
+            <p class="font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Case Studies</p>
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">Featured projects.</h2>
+            <p class="mt-3">Real problems, the approach I took, and the impact. Click any card for the full case study.</p>
+          </div>
+          <div id="filterBar" role="tablist" aria-label="Filter projects" class="flex flex-wrap gap-2 font-mono text-xs">
+            <button data-filter="all" class="filter-btn rounded-full border px-4 py-2 transition">All</button>
+            <button data-filter="bi" class="filter-btn rounded-full border px-4 py-2 transition">BI &amp; Analytics</button>
+            <button data-filter="automation" class="filter-btn rounded-full border px-4 py-2 transition">Automation</button>
+            <button data-filter="database" class="filter-btn rounded-full border px-4 py-2 transition">Database Architecture</button>
+          </div>
+        </div>
+
+        <div id="projectGrid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3"><!-- rendered by JS --></div>
+        <p id="emptyState" class="mt-10 hidden text-center font-mono text-sm text-slate-400">-- 0 rows returned</p>
+      </div>
+    </section>
+
+    <!-- ========================= EXPERIENCE ========================= -->
+    <section id="experience" class="border-t border-slate-200 bg-white/50 py-20 sm:py-24 dark:border-white/5 dark:bg-ink-950/30">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6">
+        <div class="reveal">
+          <p class="font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Experience &amp; Education</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">The journey so far.</h2>
+        </div>
+
+        <ol class="relative mt-12 space-y-10 border-l border-slate-200 pl-8 dark:border-white/10">
+          <!-- Honda -->
+          <li class="reveal relative">
+            <span class="absolute -left-[41px] top-1 grid h-5 w-5 place-items-center rounded-full border-4 border-slate-50 bg-emerald-500 dark:border-ink-900"></span>
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-emerald-500/50 hover:shadow-xl dark:border-white/10 dark:bg-ink-800/60">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-md bg-emerald-500/10 px-2 py-0.5 font-mono text-[11px] font-medium text-emerald-600 dark:text-emerald-400">EXPERIENCE · CURRENT</span>
+              </div>
+              <h3 class="mt-3 text-lg font-bold text-slate-900 dark:text-white">Industrial Trainee — Quality Compliance &amp; Strategic Planning</h3>
+              <p class="text-sm font-medium text-cyan-600 dark:text-cyan-400">Honda Malaysia Sdn. Bhd. · QBU OHSEMS Team</p>
+              <ul class="mt-4 space-y-2 text-sm leading-relaxed">
+                <li class="flex gap-2"><span class="text-emerald-500">▹</span>Engineered an Excel/VBA workflow to automate the Monthly In-House Calibration (IHCM) schedule and torque certificate generation.</li>
+                <li class="flex gap-2"><span class="text-emerald-500">▹</span>Applied data validation rules to eliminate manual entry errors and improve the reliability of quality compliance reports.</li>
+                <li class="flex gap-2"><span class="text-emerald-500">▹</span>Supported quality compliance and strategic planning activities within a large-scale manufacturing environment.</li>
+              </ul>
+              <div class="mt-4 flex flex-wrap gap-1.5 font-mono text-[11px]">
+                <span class="rounded bg-slate-100 px-2 py-0.5 dark:bg-white/5">Excel</span>
+                <span class="rounded bg-slate-100 px-2 py-0.5 dark:bg-white/5">VBA</span>
+                <span class="rounded bg-slate-100 px-2 py-0.5 dark:bg-white/5">Data Validation</span>
+                <span class="rounded bg-slate-100 px-2 py-0.5 dark:bg-white/5">Compliance Reporting</span>
+              </div>
+            </div>
+          </li>
+
+          <!-- UTeM degree -->
+          <li class="reveal relative">
+            <span class="absolute -left-[41px] top-1 grid h-5 w-5 place-items-center rounded-full border-4 border-slate-50 bg-cyan-500 dark:border-ink-900"></span>
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-cyan-500/50 hover:shadow-xl dark:border-white/10 dark:bg-ink-800/60">
+              <span class="rounded-md bg-cyan-500/10 px-2 py-0.5 font-mono text-[11px] font-medium text-cyan-600 dark:text-cyan-400">EDUCATION · FINAL YEAR</span>
+              <h3 class="mt-3 text-lg font-bold text-slate-900 dark:text-white">Bachelor of Computer Science (Database Management)</h3>
+              <p class="text-sm font-medium text-cyan-600 dark:text-cyan-400">Universiti Teknikal Malaysia Melaka (UTeM)</p>
+              <ul class="mt-4 space-y-2 text-sm leading-relaxed">
+                <li class="flex gap-2"><span class="text-cyan-500">▹</span>CGPA above 3.50.</li>
+                <li class="flex gap-2"><span class="text-cyan-500">▹</span>Focus on relational database design, SQL query optimization, database security and business intelligence.</li>
+                <li class="flex gap-2"><span class="text-cyan-500">▹</span>Built the UTeM Music Studio Management &amp; Analytics System and a Database Security &amp; SQL Auditing Suite.</li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Virtuoso -->
+          <li class="reveal relative">
+            <span class="absolute -left-[41px] top-1 grid h-5 w-5 place-items-center rounded-full border-4 border-slate-50 bg-violet-500 dark:border-ink-900"></span>
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-violet-500/50 hover:shadow-xl dark:border-white/10 dark:bg-ink-800/60">
+              <span class="rounded-md bg-violet-500/10 px-2 py-0.5 font-mono text-[11px] font-medium text-violet-600 dark:text-violet-400">LEADERSHIP</span>
+              <h3 class="mt-3 text-lg font-bold text-slate-900 dark:text-white">President, Virtuoso UTeM</h3>
+              <p class="text-sm font-medium text-cyan-600 dark:text-cyan-400">Universiti Teknikal Malaysia Melaka</p>
+              <ul class="mt-4 space-y-2 text-sm leading-relaxed">
+                <li class="flex gap-2"><span class="text-violet-500">▹</span>Led the club's committee, coordinating members, university administration and external partners.</li>
+                <li class="flex gap-2"><span class="text-violet-500">▹</span>Developed cross-functional communication and stakeholder management skills — translating needs into clear plans, the same skill an analyst uses to turn business questions into queries.</li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Diploma -->
+          <li class="reveal relative">
+            <span class="absolute -left-[41px] top-1 grid h-5 w-5 place-items-center rounded-full border-4 border-slate-50 bg-slate-400 dark:border-ink-900"></span>
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-slate-400/60 hover:shadow-xl dark:border-white/10 dark:bg-ink-800/60">
+              <span class="rounded-md bg-slate-500/10 px-2 py-0.5 font-mono text-[11px] font-medium text-slate-600 dark:text-slate-400">EDUCATION</span>
+              <h3 class="mt-3 text-lg font-bold text-slate-900 dark:text-white">Diploma in Computer Science</h3>
+              <ul class="mt-4 space-y-2 text-sm leading-relaxed">
+                <li class="flex gap-2"><span class="text-slate-400">▹</span>Dean's List recipient for 4 out of 5 semesters.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========================= CONTACT ========================= -->
+    <section id="contact" class="py-20 sm:py-24">
+      <div class="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.15fr]">
+        <div class="reveal">
+          <p class="font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Contact</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">Let's turn your data into decisions.</h2>
+          <p class="mt-4 text-base leading-relaxed sm:text-lg">
+            I'm actively looking for entry-level Data Analyst, BI Analyst and Database roles. If you have an opportunity,
+            a question about my projects, or just want to connect — my inbox is open.
+          </p>
+
+          <div class="mt-8 space-y-3">
+            <p id="linksPending" hidden class="rounded-xl border border-dashed border-slate-300 p-4 text-sm dark:border-white/15">
+              Direct email, LinkedIn and GitHub links are being added. In the meantime, use the form and your message is ready to paste wherever you reach me.
+            </p>
+            <a id="emailLink" href="#" class="group flex items-center gap-4 rounded-xl border border-slate-200 p-4 transition hover:border-emerald-500/60 hover:bg-emerald-500/5 dark:border-white/10">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/10 text-emerald-500">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              </span>
+              <span class="min-w-0">
+                <span class="block text-xs uppercase tracking-wider text-slate-400">Email</span>
+                <span id="emailText" class="block truncate font-medium text-slate-900 group-hover:text-emerald-600 dark:text-white dark:group-hover:text-emerald-400"></span>
+              </span>
+            </a>
+            <a id="linkedinLink" href="#" target="_blank" rel="noopener" class="group flex items-center gap-4 rounded-xl border border-slate-200 p-4 transition hover:border-cyan-500/60 hover:bg-cyan-500/5 dark:border-white/10">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-cyan-500/10 text-cyan-500">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              </span>
+              <span class="min-w-0">
+                <span class="block text-xs uppercase tracking-wider text-slate-400">LinkedIn</span>
+                <span id="linkedinText" class="block truncate font-medium text-slate-900 group-hover:text-cyan-600 dark:text-white dark:group-hover:text-cyan-400"></span>
+              </span>
+            </a>
+            <a id="githubLink" href="#" target="_blank" rel="noopener" class="group flex items-center gap-4 rounded-xl border border-slate-200 p-4 transition hover:border-slate-400 hover:bg-slate-500/5 dark:border-white/10">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-slate-500/10 text-slate-600 dark:text-slate-300">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+              </span>
+              <span class="min-w-0">
+                <span class="block text-xs uppercase tracking-wider text-slate-400">GitHub</span>
+                <span id="githubText" class="block truncate font-medium text-slate-900 dark:text-white"></span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <form id="contactForm" class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-8 dark:border-white/10 dark:bg-ink-800/60 dark:shadow-none" novalidate>
+          <p class="font-mono text-[11px] uppercase tracking-widest text-slate-400">INSERT INTO messages</p>
+          <div class="mt-5 grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="name" class="mb-1.5 block text-sm font-medium text-slate-900 dark:text-white">Name</label>
+              <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your full name"
+                class="w-full rounded-lg border border-slate-300 bg-transparent px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/15 dark:text-white" />
+            </div>
+            <div>
+              <label for="email" class="mb-1.5 block text-sm font-medium text-slate-900 dark:text-white">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com"
+                class="w-full rounded-lg border border-slate-300 bg-transparent px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/15 dark:text-white" />
+            </div>
+          </div>
+          <div class="mt-5">
+            <label for="subject" class="mb-1.5 block text-sm font-medium text-slate-900 dark:text-white">Subject</label>
+            <select id="subject" name="subject"
+              class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/15 dark:bg-ink-800 dark:text-white">
+              <option>Job / Internship Opportunity</option>
+              <option>Project Collaboration</option>
+              <option>Question About a Project</option>
+              <option>Just Saying Hello</option>
+            </select>
+          </div>
+          <div class="mt-5">
+            <label for="message" class="mb-1.5 block text-sm font-medium text-slate-900 dark:text-white">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Tell me about the role or project…"
+              class="w-full resize-y rounded-lg border border-slate-300 bg-transparent px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/15 dark:text-white"></textarea>
+          </div>
+          <p id="formStatus" class="mt-4 hidden rounded-lg px-3 py-2 font-mono text-xs" role="status"></p>
+          <button type="submit" class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:brightness-110">
+            Copy Message
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m22 2-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer class="border-t border-slate-200 py-8 dark:border-white/5">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm sm:flex-row sm:px-6">
+      <p>© <span id="year"></span> Akmal Harith Bin Ibrahim. Built with HTML, Tailwind CSS &amp; Chart.js.</p>
+      <p class="font-mono text-xs text-slate-400">-- query executed successfully</p>
+    </div>
+  </footer>
+
+  <!-- ========================= PROJECT MODAL ========================= -->
+  <dialog id="projectModal" class="m-auto w-[calc(100%-2rem)] max-w-2xl rounded-2xl border border-slate-200 bg-white p-0 text-slate-700 shadow-2xl dark:border-white/10 dark:bg-ink-800 dark:text-slate-300">
+    <div class="max-h-[85vh] overflow-y-auto">
+      <div class="sticky top-0 flex items-start justify-between gap-4 border-b border-slate-200 bg-white/95 p-6 backdrop-blur dark:border-white/10 dark:bg-ink-800/95">
+        <div>
+          <div id="modalBadges" class="flex flex-wrap gap-1.5"></div>
+          <h3 id="modalTitle" class="mt-2 text-xl font-bold text-slate-900 sm:text-2xl dark:text-white"></h3>
+        </div>
+        <button id="modalClose" type="button" aria-label="Close" class="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-slate-200 hover:border-emerald-500 hover:text-emerald-500 dark:border-white/10">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <div class="space-y-6 p-6">
+        <p id="modalSummary" class="leading-relaxed"></p>
+        <div id="modalSections" class="space-y-4"></div>
+        <div>
+          <p class="mb-2 font-mono text-[11px] uppercase tracking-widest text-slate-400">Tech Stack</p>
+          <div id="modalTech" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================= SCRIPTS ========================= -->
+  <script>
+    /* ------------------------------------------------------------------
+       CONFIG — replace these with your real links before publishing.
+    ------------------------------------------------------------------- */
+    const CONFIG = {
+      email: 'akmalharith58@gmail.com',     // e.g. 'name@example.com'
+      linkedin: 'www.linkedin.com/in/akmal-harith-094a49277',  // e.g. 'https://www.linkedin.com/in/your-profile'
+      github: 'https://github.com/Akmalhyrare',    // e.g. 'https://github.com/your-username'
+      resume: '01_Akmal_Harith_Personal_Resume',    // a hosted PDF link, e.g. Google Drive share link
+    };
+
+    /* ---------------------------- Data ---------------------------- */
+    const SKILLS = [
+      {
+        title: 'Data Analytics & Visualization',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l4-4 3 3 5-6"/>',
+        accent: 'emerald',
+        items: [
+          { name: 'Microsoft Power BI', detail: 'DAX · Data Modeling · Interactive Dashboards', level: 85 },
+          { name: 'Microsoft Excel', detail: 'Advanced Formulas · Pivot Tables · VBA Automation', level: 90 },
+          { name: 'Exploratory Data Analysis', detail: 'Profiling · Trends · Outliers', level: 75 },
+          { name: 'Data Cleaning & Reporting', detail: 'Validation · Transformation · KPI Reports', level: 85 },
+        ],
+      },
+      {
+        title: 'Database & Querying',
+        icon: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>',
+        accent: 'cyan',
+        items: [
+          { name: 'PostgreSQL', detail: 'Schemas · Functions · Policies', level: 88 },
+          { name: 'SQL', detail: 'Complex Joins · Aggregations · Query Optimization', level: 90 },
+          { name: 'Relational Database Design', detail: 'ERD · Normalization · Constraints', level: 88 },
+          { name: 'Row-Level Security (RLS)', detail: 'Role-based data access policies', level: 80 },
+        ],
+      },
+      {
+        title: 'Tools & Ecosystem',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="m8 9-4 3 4 3m8-6 4 3-4 3M14 5l-4 14"/>',
+        accent: 'violet',
+        items: [
+          { name: 'Laravel', detail: 'Web apps on top of PostgreSQL', level: 70 },
+          { name: 'PlantUML', detail: 'System & Data Flow Diagrams', level: 80 },
+          { name: 'Git / GitHub', detail: 'Version control · Collaboration', level: 75 },
+          { name: 'VS Code', detail: 'Primary development environment', level: 85 },
+        ],
+      },
+    ];
+
+    const PROJECTS = [
+      {
+        id: 'studio',
+        title: 'UTeM Music Studio Management & Analytics System',
+        categories: ['bi', 'database'],
+        labels: ['BI & Analytics', 'Database Architecture'],
+        tech: ['PostgreSQL', 'Laravel', 'Microsoft Power BI', 'DAX', 'RLS'],
+        summary: 'A normalized PostgreSQL database with Row-Level Security that tracks studio bookings and asset utilization, paired with an executive Power BI dashboard visualizing peak usage hours, booking trends and resource allocation.',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>',
+        problem: 'Studio bookings and equipment usage were tracked without a central, structured system. Management had no reliable way to see when the studio was busiest, which resources were over- or under-used, or how demand was trending over time — making scheduling and resource allocation decisions largely guesswork.',
+        approach: [
+          'Designed a normalized relational schema in PostgreSQL covering users, bookings, rooms and assets, with keys and constraints enforcing data integrity.',
+          'Implemented Row-Level Security (RLS) so each role (students, staff, administrators) only sees the records they are authorized to access.',
+          'Built the booking application layer in Laravel on top of the database.',
+          'Modelled the data in Power BI and wrote DAX measures to build an executive dashboard covering peak usage hours, booking trends and resource allocation.',
+        ],
+        impact: [
+          'Gave management a single source of truth for bookings and asset utilization.',
+          'Surfaced peak usage windows and booking trends visually, supporting data-driven scheduling and resource decisions.',
+          'Secured sensitive records at the database level, so dashboards and reports stay accurate and access-controlled.',
+        ],
+      },
+      {
+        id: 'ihcm',
+        title: 'Monthly In-House Calibration Schedule (IHCM) & Certificate Automation',
+        categories: ['automation'],
+        labels: ['Automation & Reporting'],
+        tech: ['Microsoft Excel', 'VBA Automation', 'Data Validation'],
+        summary: 'An automated tracking and reporting workflow built during my industrial internship at Honda Malaysia — monitoring the monthly calibration schedule and generating torque certificates automatically.',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 16v-2m8-6h-2M6 12H4m13.66-5.66-1.42 1.42M7.76 16.24l-1.42 1.42m0-11.32 1.42 1.42m8.48 8.48 1.42 1.42M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>',
+        problem: 'Monthly in-house calibration schedule monitoring and torque certificate preparation were handled manually. Repetitive data entry was time-consuming and prone to errors, which put the accuracy of quality compliance records at risk.',
+        approach: [
+          'Mapped the existing manual calibration tracking and certificate workflow with the QBU OHSEMS team.',
+          'Structured the calibration schedule into a consistent Excel data model with data validation rules to block invalid entries at the source.',
+          'Wrote VBA macros to automate schedule monitoring and generate torque certificates directly from the validated data.',
+        ],
+        impact: [
+          'Eliminated manual entry errors in calibration tracking and certificate generation.',
+          'Streamlined quality compliance reporting, freeing the team from repetitive manual work.',
+          'Delivered a repeatable workflow the team can run each month.',
+        ],
+      },
+      {
+        id: 'security',
+        title: 'Database Security & SQL Auditing Suite',
+        categories: ['database'],
+        labels: ['Database Architecture'],
+        tech: ['PostgreSQL', 'SQL', 'PlantUML', 'RLS'],
+        summary: 'Vulnerability assessments against SQL injection, combined with strict Row-Level Security policies, to protect data integrity and confidentiality and keep reporting pipelines reliable.',
+        icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3 4 6v6c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V6l-8-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/>',
+        problem: 'Analytics is only as trustworthy as the data underneath it. Databases exposed to SQL injection or overly broad access risk leaking confidential records and corrupting the data that reports depend on.',
+        approach: [
+          'Conducted vulnerability assessments to test the database against SQL injection attack patterns.',
+          'Designed and implemented strict PostgreSQL Row-Level Security (RLS) policies to enforce least-privilege data access.',
+          'Documented system architecture and data flows with PlantUML diagrams to make security boundaries clear and reviewable.',
+        ],
+        impact: [
+          'Strengthened data integrity and confidentiality at the database layer.',
+          'Ensured downstream reporting pipelines draw only from authorized, untampered data.',
+          'Produced clear documentation that makes the security model easy to audit and maintain.',
+        ],
+      },
+    ];
+
+    // Illustrative sample data for the Analytics Sandbox
+    const SANDBOX = {
+      hourly: {
+        labels: ['8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm','9pm'],
+        weekday: [4, 6, 9, 11, 7, 8, 14, 17, 21, 26, 31, 28, 19, 9],
+        weekend: [1, 3, 8, 14, 18, 16, 19, 22, 20, 17, 13, 10, 6, 3],
+        unit: 'bookings',
+      },
+      weekly: {
+        labels: ['Wk 1','Wk 2','Wk 3','Wk 4','Wk 5','Wk 6','Wk 7','Wk 8','Wk 9','Wk 10','Wk 11','Wk 12'],
+        weekday: [92, 104, 98, 121, 135, 128, 142, 160, 151, 174, 188, 196],
+        weekend: [31, 35, 30, 42, 48, 44, 51, 63, 57, 66, 74, 81],
+        unit: 'bookings',
+      },
+      resource: {
+        labels: ['Studio A', 'Studio B', 'Drum Room', 'Recording Booth', 'Keyboard Lab'],
+        short: ['Studio A', 'Studio B', 'Drums', 'Booth', 'Keys'],
+        weekday: [86, 64, 72, 91, 38],
+        weekend: [71, 48, 83, 66, 22],
+        unit: '% utilization',
+      },
+    };
+
+    /* ---------------------------- Helpers ---------------------------- */
+    const $ = (s, el = document) => el.querySelector(s);
+    const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+    const isDark = () => document.documentElement.classList.contains('dark');
+    const store = {
+      get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+      set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    };
+    const escapeHtml = (s) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    /* ---------------------------- Config wiring ---------------------------- */
+    if (CONFIG.email) { $('#emailLink').href = 'mailto:' + CONFIG.email; $('#emailText').textContent = CONFIG.email; }
+    else $('#emailLink').classList.replace('flex', 'hidden');
+    if (CONFIG.linkedin) { $('#linkedinLink').href = CONFIG.linkedin; $('#linkedinText').textContent = CONFIG.linkedin.replace(/^https?:\/\/(www\.)?/, ''); }
+    else $('#linkedinLink').classList.replace('flex', 'hidden');
+    if (CONFIG.github) { $('#githubLink').href = CONFIG.github; $('#githubText').textContent = CONFIG.github.replace(/^https?:\/\//, ''); }
+    else $('#githubLink').classList.replace('flex', 'hidden');
+    $('#linksPending').hidden = !!(CONFIG.email || CONFIG.linkedin || CONFIG.github);
+    $$('[data-resume]').forEach((a) => {
+      if (CONFIG.resume) { a.href = CONFIG.resume; a.target = '_blank'; a.rel = 'noopener'; }
+      else {
+        a.title = 'Resume available on request';
+        a.childNodes.forEach((n) => { if (n.nodeType === 3) n.textContent = n.textContent.replace('Download Resume', 'Request Resume'); });
+      }
+    });
+    $('#year').textContent = new Date().getFullYear();
+
+    /* ---------------------------- Navbar ---------------------------- */
+    const menuBtn = $('#menuBtn');
+    const mobileMenu = $('#mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('hidden') === false;
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    $$('.mobile-link, #mobileMenu a').forEach((a) => a.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Active link highlighting
+    const sections = ['about', 'skills', 'projects', 'experience', 'contact'].map((id) => document.getElementById(id));
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          $$('.nav-link').forEach((l) => {
+            const active = l.getAttribute('href') === '#' + entry.target.id;
+            l.classList.toggle('text-emerald-500', active);
+            l.classList.toggle('bg-emerald-500/10', active);
+          });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach((s) => navObserver.observe(s));
+
+    /* ---------------------------- Theme toggle ---------------------------- */
+    $('#themeToggle').addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark');
+      store.set('theme', dark ? 'dark' : 'light');
+      updateChartTheme();
+    });
+
+    /* ---------------------------- Scroll reveal ---------------------------- */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    const observeReveals = () => $$('.reveal:not(.is-visible)').forEach((el) => revealObserver.observe(el));
+
+    /* ---------------------------- Skills ---------------------------- */
+    const ACCENTS = {
+      emerald: { text: 'text-emerald-500', bg: 'bg-emerald-500/10', bar: 'from-emerald-500 to-emerald-400', border: 'hover:border-emerald-500/50' },
+      cyan: { text: 'text-cyan-500', bg: 'bg-cyan-500/10', bar: 'from-cyan-500 to-cyan-400', border: 'hover:border-cyan-500/50' },
+      violet: { text: 'text-violet-500', bg: 'bg-violet-500/10', bar: 'from-violet-500 to-violet-400', border: 'hover:border-violet-500/50' },
+    };
+    $('#skillsGrid').innerHTML = SKILLS.map((group) => {
+      const a = ACCENTS[group.accent];
+      return `
+        <article class="reveal rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-xl ${a.border} dark:border-white/10 dark:bg-ink-800/60">
+          <div class="flex items-center gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-xl ${a.bg} ${a.text}">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">${group.icon}</svg>
+            </span>
+            <h3 class="font-bold text-slate-900 dark:text-white">${group.title}</h3>
+          </div>
+          <ul class="mt-6 space-y-5">
+            ${group.items.map((s) => `
+              <li>
+                <div class="flex items-baseline justify-between gap-3">
+                  <span class="text-sm font-semibold text-slate-900 dark:text-white">${s.name}</span>
+                  <span class="font-mono text-[11px] ${a.text}">${s.level}%</span>
+                </div>
+                <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">${s.detail}</p>
+                <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-white/5">
+                  <div class="bar-fill h-full rounded-full bg-gradient-to-r ${a.bar}" style="width:${s.level}%"></div>
+                </div>
+              </li>`).join('')}
+          </ul>
+        </article>`;
+    }).join('');
+
+    /* ---------------------------- Projects ---------------------------- */
+    const BADGE = {
+      'BI & Analytics': 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
+      'Database Architecture': 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400',
+      'Automation & Reporting': 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
+    };
+    const badgeHtml = (l) => `<span class="rounded-md px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide ${BADGE[l]}">${l}</span>`;
+    const techHtml = (t) => `<span class="rounded-md border border-slate-200 px-2 py-0.5 font-mono text-[11px] dark:border-white/10">${t}</span>`;
+
+    $('#projectGrid').innerHTML = PROJECTS.map((p, i) => `
+      <article data-cat="${p.categories.join(' ')}" class="project-card reveal group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/10 dark:border-white/10 dark:bg-ink-800/60">
+        <div class="flex items-start justify-between gap-3">
+          <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 text-emerald-500">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">${p.icon}</svg>
+          </span>
+          <span class="font-mono text-[11px] text-slate-400">${p.tech[0]}</span>
+        </div>
+        <div class="mt-5 flex flex-wrap gap-1.5">${p.labels.map(badgeHtml).join('')}</div>
+        <h3 class="mt-3 text-lg font-bold leading-snug text-slate-900 dark:text-white">${p.title}</h3>
+        <p class="mt-3 flex-1 text-sm leading-relaxed">${p.summary}</p>
+        <div class="mt-5 flex flex-wrap gap-1.5">${p.tech.map(techHtml).join('')}</div>
+        <button type="button" data-open="${p.id}" class="mt-6 inline-flex items-center gap-2 self-start text-sm font-semibold text-emerald-600 transition hover:gap-3 dark:text-emerald-400">
+          View case study
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </button>
+      </article>`).join('');
+
+    // Filtering
+    function setFilter(filter) {
+      $$('.filter-btn').forEach((b) => {
+        const active = b.dataset.filter === filter;
+        b.setAttribute('aria-selected', String(active));
+        b.className = 'filter-btn rounded-full border px-4 py-2 transition ' + (active
+          ? 'border-transparent bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-md shadow-emerald-500/20'
+          : 'border-slate-300 hover:border-emerald-500 hover:text-emerald-600 dark:border-white/15 dark:hover:text-emerald-400');
+      });
+      let visible = 0;
+      $$('.project-card').forEach((card) => {
+        const show = filter === 'all' || card.dataset.cat.split(' ').includes(filter);
+        card.classList.toggle('hidden', !show);
+        if (show) { visible++; card.classList.add('is-visible'); }
+      });
+      $('#emptyState').classList.toggle('hidden', visible > 0);
+    }
+    $$('.filter-btn').forEach((b) => b.addEventListener('click', () => setFilter(b.dataset.filter)));
+    setFilter('all');
+
+    // Modal
+    const modal = $('#projectModal');
+    function openProject(id) {
+      const p = PROJECTS.find((x) => x.id === id);
+      if (!p) return;
+      $('#modalBadges').innerHTML = p.labels.map(badgeHtml).join('');
+      $('#modalTitle').textContent = p.title;
+      $('#modalSummary').textContent = p.summary;
+      const block = (label, color, content) => `
+        <section class="rounded-xl border border-slate-200 p-5 dark:border-white/10">
+          <p class="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-widest ${color}">
+            <span class="h-1.5 w-1.5 rounded-full bg-current"></span>${label}
+          </p>
+          <div class="mt-3 text-sm leading-relaxed">${content}</div>
+        </section>`;
+      const list = (items, mark) => `<ul class="space-y-2">${items.map((t) => `<li class="flex gap-2"><span class="${mark}">▹</span><span>${escapeHtml(t)}</span></li>`).join('')}</ul>`;
+      $('#modalSections').innerHTML =
+        block('Problem', 'text-rose-500', `<p>${escapeHtml(p.problem)}</p>`) +
+        block('Approach', 'text-cyan-500', list(p.approach, 'text-cyan-500')) +
+        block('Impact', 'text-emerald-500', list(p.impact, 'text-emerald-500'));
+      $('#modalTech').innerHTML = p.tech.map(techHtml).join('');
+      modal.showModal();
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() { modal.close(); }
+    modal.addEventListener('close', () => (document.body.style.overflow = ''));
+    $('#modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    $('#projectGrid').addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-open]');
+      const card = e.target.closest('.project-card');
+      if (btn) openProject(btn.dataset.open);
+      else if (card) openProject(card.querySelector('[data-open]').dataset.open);
+    });
+
+    /* ---------------------------- Analytics Sandbox ---------------------------- */
+    let chart = null;
+    let currentView = 'hourly';
+
+    function themeColors() {
+      const dark = isDark();
+      return {
+        grid: dark ? 'rgba(148,163,184,.10)' : 'rgba(15,23,42,.07)',
+        tick: dark ? '#94a3b8' : '#64748b',
+        tooltipBg: dark ? '#0b1222' : '#ffffff',
+        tooltipText: dark ? '#e2e8f0' : '#0f172a',
+        tooltipBorder: dark ? 'rgba(255,255,255,.1)' : 'rgba(15,23,42,.1)',
+      };
+    }
+
+    function buildDataset(view, weekend) {
+      const d = SANDBOX[view];
+      const data = weekend ? d.weekend : d.weekday;
+      const max = Math.max(...data);
+      const ctx = $('#sandboxChart').getContext('2d');
+
+      if (view === 'weekly') {
+        const grad = ctx.createLinearGradient(0, 0, 0, 240);
+        grad.addColorStop(0, 'rgba(16,185,129,.35)');
+        grad.addColorStop(1, 'rgba(16,185,129,0)');
+        return {
+          type: 'line',
+          dataset: {
+            data, borderColor: '#10b981', backgroundColor: grad, fill: true, tension: .35,
+            borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 5, pointBackgroundColor: '#10b981', pointHoverBorderColor: '#fff', pointHoverBorderWidth: 2,
+          },
+        };
+      }
+      if (view === 'resource') {
+        return {
+          type: 'bar',
+          indexAxis: 'y',
+          dataset: {
+            data, borderRadius: 6, borderSkipped: false, barThickness: 18,
+            backgroundColor: data.map((v) => v >= 80 ? '#10b981' : v >= 50 ? '#06b6d4' : 'rgba(100,116,139,.55)'),
+            hoverBackgroundColor: data.map((v) => v >= 80 ? '#34d399' : v >= 50 ? '#22d3ee' : 'rgba(100,116,139,.8)'),
+          },
+        };
+      }
+      return {
+        type: 'bar',
+        dataset: {
+          data, borderRadius: 5, borderSkipped: false, maxBarThickness: 22,
+          backgroundColor: data.map((v) => v === max ? '#10b981' : 'rgba(6,182,212,.45)'),
+          hoverBackgroundColor: data.map((v) => v === max ? '#34d399' : '#06b6d4'),
+        },
+      };
+    }
+
+    function updateKpis(view, weekend) {
+      const d = SANDBOX[view];
+      const data = weekend ? d.weekend : d.weekday;
+      const maxIdx = data.indexOf(Math.max(...data));
+      const total = data.reduce((a, b) => a + b, 0);
+      const avg = total / data.length;
+      const scope = weekend ? 'weekends' : 'weekdays';
+
+      if (view === 'hourly') {
+        $('#kpi1Label').textContent = 'Peak hour';  $('#kpi1').textContent = d.labels[maxIdx];
+        $('#kpi2Label').textContent = 'Bookings';   $('#kpi2').textContent = total.toLocaleString();
+        $('#kpi3Label').textContent = 'Peak share'; $('#kpi3').textContent = Math.round((data[maxIdx] / total) * 100) + '%';
+        $('#insightText').textContent = weekend
+          ? `On ${scope}, demand spreads across the afternoon and peaks at ${d.labels[maxIdx]} — suited to longer open sessions.`
+          : `On ${scope}, demand surges after classes, peaking at ${d.labels[maxIdx]}. Extending evening slots would ease congestion.`;
+      } else if (view === 'weekly') {
+        const growth = Math.round(((data[data.length - 1] - data[0]) / data[0]) * 100);
+        $('#kpi1Label').textContent = 'Best week';  $('#kpi1').textContent = d.labels[maxIdx];
+        $('#kpi2Label').textContent = 'Bookings';   $('#kpi2').textContent = total.toLocaleString();
+        $('#kpi3Label').textContent = 'Growth';     $('#kpi3').textContent = '+' + growth + '%';
+        $('#insightText').textContent = `${scope[0].toUpperCase() + scope.slice(1)} bookings grew ${growth}% over the semester — a steady upward trend heading into exam-period recitals.`;
+      } else {
+        const minIdx = data.indexOf(Math.min(...data));
+        $('#kpi1Label').textContent = 'Most used';  $('#kpi1').textContent = d.short[maxIdx];
+        $('#kpi2Label').textContent = 'Least used'; $('#kpi2').textContent = d.short[minIdx];
+        $('#kpi3Label').textContent = 'Avg util.';  $('#kpi3').textContent = Math.round(avg) + '%';
+        $('#insightText').textContent = `${d.labels[maxIdx]} runs at ${data[maxIdx]}% on ${scope} while the ${d.labels[minIdx]} sits at ${data[minIdx]}% — a clear case for reallocating sessions.`;
+      }
+    }
+
+    function renderChart() {
+      if (typeof Chart === 'undefined') {
+        $('#sandboxChart').parentElement.innerHTML = '<p class="grid h-full place-items-center font-mono text-xs text-slate-400">Chart library failed to load.</p>';
+        return;
+      }
+      const weekend = $('#weekendToggle').checked;
+      const d = SANDBOX[currentView];
+      const built = buildDataset(currentView, weekend);
+      const c = themeColors();
+      const horizontal = built.indexAxis === 'y';
+
+      if (chart) chart.destroy();
+      chart = new Chart($('#sandboxChart'), {
+        type: built.type,
+        data: { labels: d.labels, datasets: [{ label: d.unit, ...built.dataset }] },
+        options: {
+          indexAxis: built.indexAxis || 'x',
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 700, easing: 'easeOutQuart' },
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: c.tooltipBg, titleColor: c.tooltipText, bodyColor: c.tooltipText,
+              borderColor: c.tooltipBorder, borderWidth: 1, padding: 10, cornerRadius: 8, displayColors: false,
+              titleFont: { family: 'JetBrains Mono', size: 11 }, bodyFont: { family: 'JetBrains Mono', size: 12, weight: '600' },
+              callbacks: { label: (ctx) => `${ctx.parsed[horizontal ? 'x' : 'y']}${currentView === 'resource' ? '%' : ''} ${currentView === 'resource' ? 'utilization' : 'bookings'}` },
+            },
+          },
+          scales: {
+            x: {
+              grid: { display: horizontal, color: c.grid, drawTicks: false },
+              border: { display: false },
+              ticks: Object.assign(
+                { color: c.tick, font: { family: 'JetBrains Mono', size: 10 }, maxRotation: 0, autoSkipPadding: 8, padding: 6 },
+                horizontal ? { callback: (v) => v + '%' } : {}
+              ),
+              max: horizontal ? 100 : undefined, beginAtZero: true,
+            },
+            y: {
+              grid: { display: !horizontal, color: c.grid, drawTicks: false },
+              border: { display: false },
+              ticks: { color: c.tick, font: { family: 'JetBrains Mono', size: 10 }, padding: 8, maxTicksLimit: 5 },
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+      updateKpis(currentView, weekend);
+    }
+
+    function updateChartTheme() { if (chart) renderChart(); }
+
+    function setView(view) {
+      currentView = view;
+      $$('.sandbox-tab').forEach((t) => {
+        const active = t.dataset.view === view;
+        t.setAttribute('aria-selected', String(active));
+        t.classList.toggle('bg-white', active);
+        t.classList.toggle('dark:bg-ink-700', active);
+        t.classList.toggle('shadow-sm', active);
+        t.classList.toggle('text-emerald-600', active);
+        t.classList.toggle('dark:text-emerald-400', active);
+        t.classList.toggle('text-slate-500', !active);
+      });
+      renderChart();
+    }
+    $$('.sandbox-tab').forEach((t) => t.addEventListener('click', () => setView(t.dataset.view)));
+    $('#weekendToggle').addEventListener('change', renderChart);
+
+    /* ---------------------------- Contact form ---------------------------- */
+    $('#contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = e.currentTarget;
+      const status = $('#formStatus');
+      const name = f.name.value.trim();
+      const email = f.email.value.trim();
+      const message = f.message.value.trim();
+      const showStatus = (msg, ok) => {
+        status.textContent = msg;
+        status.className = 'mt-4 rounded-lg px-3 py-2 font-mono text-xs ' + (ok
+          ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+          : 'bg-rose-500/10 text-rose-600 dark:text-rose-400');
+      };
+      if (!name || !email || !message) return showStatus('ERROR: all fields are required.', false);
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showStatus('ERROR: please enter a valid email address.', false);
+
+      // No backend: copy the composed message so the visitor can send it from their own email.
+      const subject = `${f.subject.value} — from ${name}`;
+      const text = `Subject: ${subject}\n\n${message}\n\n— ${name} (${email})`;
+      const where = CONFIG.email ? `Paste it into an email to ${CONFIG.email}.` : 'Paste it into a message to me.';
+      const done = (copied) => showStatus(copied
+        ? `Message copied to your clipboard. ${where}`
+        : `Copy the message from the box above. ${where}`, true);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => done(true), () => { f.message.value = text; f.message.select(); done(false); });
+      } else { f.message.value = text; f.message.select(); done(false); }
+    });
+
+    const followHost = () => {
+      const dark = resolveTheme() === 'dark';
+      if (dark !== isDark()) { document.documentElement.classList.toggle('dark', dark); updateChartTheme(); }
+    };
+    if (window.matchMedia) matchMedia('(prefers-color-scheme: light)').addEventListener('change', followHost);
+    new MutationObserver(followHost).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    /* ---------------------------- Init ---------------------------- */
+    observeReveals();
+    setView('hourly');
+  </script>
+
+</body></html>
