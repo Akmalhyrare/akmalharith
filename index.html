@@ -1,4 +1,6 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Akmal Harith Portfolio</title>
@@ -36,9 +38,6 @@
     };
   </script>
 
-  <!-- Chart.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-
   <script>
     // Apply saved theme before paint to avoid a flash
     window.resolveTheme = function () {
@@ -49,7 +48,6 @@
       if (host === 'light' || host === 'dark') return host;
       return window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     };
-    document.documentElement.classList.add('scroll-smooth');
     document.documentElement.classList.toggle('dark', resolveTheme() === 'dark');
   </script>
 
@@ -88,7 +86,9 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
+</head>
 
+<body class="bg-slate-50 text-slate-700 dark:bg-ink-900 dark:text-slate-300 font-sans transition-colors duration-300 overflow-x-hidden">
 
   <!-- ========================= NAVBAR ========================= -->
   <header id="navbar" class="fixed inset-x-0 top-0 z-50 transition-all duration-300" style="padding-top: env(safe-area-inset-top, 0px)">
@@ -182,64 +182,35 @@
           </div>
         </div>
 
-        <!-- Analytics Sandbox -->
+        <!-- Photo Gallery -->
         <div class="animate-fadeUp [animation-delay:.15s]">
-          <div class="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-2xl shadow-slate-300/40 backdrop-blur dark:border-white/10 dark:bg-ink-800/80 dark:shadow-black/40">
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <p class="font-mono text-[11px] uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Analytics Sandbox</p>
-                <h2 class="mt-1 text-base font-bold text-slate-900 dark:text-white">Music Studio Utilization</h2>
+          <div class="rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-2xl shadow-slate-300/40 backdrop-blur sm:p-4 dark:border-white/10 dark:bg-ink-800/80 dark:shadow-black/40">
+            <div id="gallery" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Photo gallery"
+              class="group relative aspect-[4/3] overflow-hidden rounded-xl bg-slate-100 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:bg-ink-950/60">
+              <div id="gallerySlides" class="absolute inset-0"></div>
+
+              <!-- caption -->
+              <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4 pt-12">
+                <p id="galleryCaption" class="text-sm font-semibold text-white" aria-live="polite"></p>
+                <p id="gallerySub" class="mt-0.5 font-mono text-[11px] text-white/70"></p>
               </div>
-              <div class="flex gap-1.5">
-                <span class="h-2.5 w-2.5 rounded-full bg-rose-400/80"></span>
-                <span class="h-2.5 w-2.5 rounded-full bg-amber-400/80"></span>
-                <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
-              </div>
+
+              <!-- counter -->
+              <span id="galleryCount" class="absolute right-3 top-3 rounded-full bg-black/50 px-2.5 py-1 font-mono text-[11px] text-white backdrop-blur"></span>
+
+              <!-- arrows -->
+              <button id="galleryPrev" type="button" aria-label="Previous photo"
+                class="absolute left-2 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full bg-black/45 text-white opacity-0 backdrop-blur transition hover:bg-black/65 focus:opacity-100 group-hover:opacity-100 max-sm:opacity-100">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button id="galleryNext" type="button" aria-label="Next photo"
+                class="absolute right-2 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full bg-black/45 text-white opacity-0 backdrop-blur transition hover:bg-black/65 focus:opacity-100 group-hover:opacity-100 max-sm:opacity-100">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+              </button>
             </div>
 
-            <!-- View tabs -->
-            <div role="tablist" aria-label="Chart view" class="mt-4 grid grid-cols-3 gap-1 rounded-lg bg-slate-100 p-1 font-mono text-[11px] sm:text-xs dark:bg-ink-950/60">
-              <button role="tab" data-view="hourly" class="sandbox-tab rounded-md px-2 py-1.5 font-medium transition">Peak Hours</button>
-              <button role="tab" data-view="weekly" class="sandbox-tab rounded-md px-2 py-1.5 font-medium transition">Weekly Trend</button>
-              <button role="tab" data-view="resource" class="sandbox-tab rounded-md px-2 py-1.5 font-medium transition">Resources</button>
-            </div>
-
-            <!-- KPIs -->
-            <div class="mt-4 grid grid-cols-3 gap-2">
-              <div class="rounded-lg border border-slate-200 p-2.5 dark:border-white/10">
-                <p class="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400" id="kpi1Label">Peak slot</p>
-                <p class="mt-0.5 font-mono text-base font-semibold text-slate-900 sm:text-lg dark:text-white" id="kpi1">—</p>
-              </div>
-              <div class="rounded-lg border border-slate-200 p-2.5 dark:border-white/10">
-                <p class="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400" id="kpi2Label">Total</p>
-                <p class="mt-0.5 font-mono text-base font-semibold text-slate-900 sm:text-lg dark:text-white" id="kpi2">—</p>
-              </div>
-              <div class="rounded-lg border border-slate-200 p-2.5 dark:border-white/10">
-                <p class="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400" id="kpi3Label">Avg</p>
-                <p class="mt-0.5 font-mono text-base font-semibold text-emerald-600 sm:text-lg dark:text-emerald-400" id="kpi3">—</p>
-              </div>
-            </div>
-
-            <div class="relative mt-4 h-56 sm:h-60">
-              <canvas id="sandboxChart" aria-label="Interactive studio utilization chart" role="img"></canvas>
-            </div>
-
-            <!-- Insight + filter -->
-            <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p class="flex items-start gap-2 text-xs leading-relaxed sm:text-[13px]">
-                <span class="mt-0.5 font-mono text-cyan-600 dark:text-cyan-400">&gt;</span>
-                <span id="insightText">—</span>
-              </p>
-              <label id="weekendWrap" class="flex shrink-0 cursor-pointer items-center gap-2 font-mono text-[11px]">
-                <input id="weekendToggle" type="checkbox" class="peer sr-only" />
-                <span class="relative h-5 w-9 rounded-full bg-slate-300 transition peer-checked:bg-emerald-500 dark:bg-slate-600
-                  after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition peer-checked:after:translate-x-4"></span>
-                Weekends only
-              </label>
-            </div>
-            <p class="mt-3 border-t border-slate-200 pt-3 font-mono text-[10px] text-slate-400 dark:border-white/10 dark:text-slate-500">
-              Illustrative sample data modelled on the UTeM Music Studio project schema.
-            </p>
+            <!-- thumbnails -->
+            <div id="galleryThumbs" class="mt-3 flex gap-2 overflow-x-auto pb-1"></div>
           </div>
         </div>
       </div>
@@ -524,7 +495,7 @@
   <!-- ========================= FOOTER ========================= -->
   <footer class="border-t border-slate-200 py-8 dark:border-white/5">
     <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-sm sm:flex-row sm:px-6">
-      <p>© <span id="year"></span> Akmal Harith Bin Ibrahim. Built with HTML, Tailwind CSS &amp; Chart.js.</p>
+      <p>© <span id="year"></span> Akmal Harith Bin Ibrahim. Built with HTML &amp; Tailwind CSS.</p>
       <p class="font-mono text-xs text-slate-400">-- query executed successfully</p>
     </div>
   </footer>
@@ -558,10 +529,20 @@
        CONFIG — replace these with your real links before publishing.
     ------------------------------------------------------------------- */
     const CONFIG = {
-      email: 'akmalharith58@gmail.com',     // e.g. 'name@example.com'
-      linkedin: 'www.linkedin.com/in/akmal-harith-094a49277',  // e.g. 'https://www.linkedin.com/in/your-profile'
-      github: 'https://github.com/Akmalhyrare',    // e.g. 'https://github.com/your-username'
-      resume: '01_Akmal_Harith_Personal_Resume',    // a hosted PDF link, e.g. Google Drive share link
+      email: 'akmalharith58@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/akmal-harith-094a49277',
+      github: 'https://github.com/Akmalhyrare',
+      // Put the PDF in the same folder as index.html (or paste a Google Drive share link instead)
+      resume: '01_Akmal_Harith_Personal_Resume.pdf',
+
+      // Hero photo gallery: put your photos in an "images" folder next to index.html.
+      // Add, remove or reorder entries freely. "sub" is optional.
+      images: [
+        { src: 'images/photo-1.jpg', caption: 'Akmal Harith Bin Ibrahim', sub: 'Aspiring Data Analyst' },
+        { src: 'images/photo-2.jpg', caption: 'Industrial Training', sub: 'Honda Malaysia Sdn. Bhd.' },
+        { src: 'images/photo-3.jpg', caption: 'UTeM Music Studio Project', sub: 'Final Year Project' },
+      ],
+      autoplaySeconds: 5,   // set to 0 to turn off auto-slide
     };
 
     /* ---------------------------- Data ---------------------------- */
@@ -665,29 +646,6 @@
       },
     ];
 
-    // Illustrative sample data for the Analytics Sandbox
-    const SANDBOX = {
-      hourly: {
-        labels: ['8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm','9pm'],
-        weekday: [4, 6, 9, 11, 7, 8, 14, 17, 21, 26, 31, 28, 19, 9],
-        weekend: [1, 3, 8, 14, 18, 16, 19, 22, 20, 17, 13, 10, 6, 3],
-        unit: 'bookings',
-      },
-      weekly: {
-        labels: ['Wk 1','Wk 2','Wk 3','Wk 4','Wk 5','Wk 6','Wk 7','Wk 8','Wk 9','Wk 10','Wk 11','Wk 12'],
-        weekday: [92, 104, 98, 121, 135, 128, 142, 160, 151, 174, 188, 196],
-        weekend: [31, 35, 30, 42, 48, 44, 51, 63, 57, 66, 74, 81],
-        unit: 'bookings',
-      },
-      resource: {
-        labels: ['Studio A', 'Studio B', 'Drum Room', 'Recording Booth', 'Keyboard Lab'],
-        short: ['Studio A', 'Studio B', 'Drums', 'Booth', 'Keys'],
-        weekday: [86, 64, 72, 91, 38],
-        weekend: [71, 48, 83, 66, 22],
-        unit: '% utilization',
-      },
-    };
-
     /* ---------------------------- Helpers ---------------------------- */
     const $ = (s, el = document) => el.querySelector(s);
     const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -707,7 +665,10 @@
     else $('#githubLink').classList.replace('flex', 'hidden');
     $('#linksPending').hidden = !!(CONFIG.email || CONFIG.linkedin || CONFIG.github);
     $$('[data-resume]').forEach((a) => {
-      if (CONFIG.resume) { a.href = CONFIG.resume; a.target = '_blank'; a.rel = 'noopener'; }
+      if (CONFIG.resume) {
+        a.href = CONFIG.resume; a.target = '_blank'; a.rel = 'noopener';
+        if (!/^https?:/i.test(CONFIG.resume)) a.setAttribute('download', '');
+      }
       else {
         a.title = 'Resume available on request';
         a.childNodes.forEach((n) => { if (n.nodeType === 3) n.textContent = n.textContent.replace('Download Resume', 'Request Resume'); });
@@ -746,7 +707,6 @@
     $('#themeToggle').addEventListener('click', () => {
       const dark = document.documentElement.classList.toggle('dark');
       store.set('theme', dark ? 'dark' : 'light');
-      updateChartTheme();
     });
 
     /* ---------------------------- Scroll reveal ---------------------------- */
@@ -874,160 +834,112 @@
       else if (card) openProject(card.querySelector('[data-open]').dataset.open);
     });
 
-    /* ---------------------------- Analytics Sandbox ---------------------------- */
-    let chart = null;
-    let currentView = 'hourly';
+    /* ---------------------------- Photo Gallery ---------------------------- */
+    (() => {
+      const imgs = (CONFIG.images || []).filter((i) => i && i.src);
+      const root = $('#gallery');
+      const slides = $('#gallerySlides');
+      const thumbs = $('#galleryThumbs');
+      const controls = ['#galleryPrev', '#galleryNext', '#galleryCount'];
+      const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let idx = 0, timer = null;
 
-    function themeColors() {
-      const dark = isDark();
-      return {
-        grid: dark ? 'rgba(148,163,184,.10)' : 'rgba(15,23,42,.07)',
-        tick: dark ? '#94a3b8' : '#64748b',
-        tooltipBg: dark ? '#0b1222' : '#ffffff',
-        tooltipText: dark ? '#e2e8f0' : '#0f172a',
-        tooltipBorder: dark ? 'rgba(255,255,255,.1)' : 'rgba(15,23,42,.1)',
-      };
-    }
+      const placeholder = (src) => `
+        <div class="grid h-full w-full place-items-center bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 p-6 text-center">
+          <div>
+            <svg class="mx-auto h-10 w-10 text-emerald-500" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 16-5-5-9 9"/></svg>
+            <p class="mt-3 font-mono text-xs text-slate-500 dark:text-slate-400">Image not found</p>
+            <p class="mt-1 break-all font-mono text-[11px] text-slate-400">${escapeHtml(src)}</p>
+          </div>
+        </div>`;
 
-    function buildDataset(view, weekend) {
-      const d = SANDBOX[view];
-      const data = weekend ? d.weekend : d.weekday;
-      const max = Math.max(...data);
-      const ctx = $('#sandboxChart').getContext('2d');
-
-      if (view === 'weekly') {
-        const grad = ctx.createLinearGradient(0, 0, 0, 240);
-        grad.addColorStop(0, 'rgba(16,185,129,.35)');
-        grad.addColorStop(1, 'rgba(16,185,129,0)');
-        return {
-          type: 'line',
-          dataset: {
-            data, borderColor: '#10b981', backgroundColor: grad, fill: true, tension: .35,
-            borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 5, pointBackgroundColor: '#10b981', pointHoverBorderColor: '#fff', pointHoverBorderWidth: 2,
-          },
-        };
-      }
-      if (view === 'resource') {
-        return {
-          type: 'bar',
-          indexAxis: 'y',
-          dataset: {
-            data, borderRadius: 6, borderSkipped: false, barThickness: 18,
-            backgroundColor: data.map((v) => v >= 80 ? '#10b981' : v >= 50 ? '#06b6d4' : 'rgba(100,116,139,.55)'),
-            hoverBackgroundColor: data.map((v) => v >= 80 ? '#34d399' : v >= 50 ? '#22d3ee' : 'rgba(100,116,139,.8)'),
-          },
-        };
-      }
-      return {
-        type: 'bar',
-        dataset: {
-          data, borderRadius: 5, borderSkipped: false, maxBarThickness: 22,
-          backgroundColor: data.map((v) => v === max ? '#10b981' : 'rgba(6,182,212,.45)'),
-          hoverBackgroundColor: data.map((v) => v === max ? '#34d399' : '#06b6d4'),
-        },
-      };
-    }
-
-    function updateKpis(view, weekend) {
-      const d = SANDBOX[view];
-      const data = weekend ? d.weekend : d.weekday;
-      const maxIdx = data.indexOf(Math.max(...data));
-      const total = data.reduce((a, b) => a + b, 0);
-      const avg = total / data.length;
-      const scope = weekend ? 'weekends' : 'weekdays';
-
-      if (view === 'hourly') {
-        $('#kpi1Label').textContent = 'Peak hour';  $('#kpi1').textContent = d.labels[maxIdx];
-        $('#kpi2Label').textContent = 'Bookings';   $('#kpi2').textContent = total.toLocaleString();
-        $('#kpi3Label').textContent = 'Peak share'; $('#kpi3').textContent = Math.round((data[maxIdx] / total) * 100) + '%';
-        $('#insightText').textContent = weekend
-          ? `On ${scope}, demand spreads across the afternoon and peaks at ${d.labels[maxIdx]} — suited to longer open sessions.`
-          : `On ${scope}, demand surges after classes, peaking at ${d.labels[maxIdx]}. Extending evening slots would ease congestion.`;
-      } else if (view === 'weekly') {
-        const growth = Math.round(((data[data.length - 1] - data[0]) / data[0]) * 100);
-        $('#kpi1Label').textContent = 'Best week';  $('#kpi1').textContent = d.labels[maxIdx];
-        $('#kpi2Label').textContent = 'Bookings';   $('#kpi2').textContent = total.toLocaleString();
-        $('#kpi3Label').textContent = 'Growth';     $('#kpi3').textContent = '+' + growth + '%';
-        $('#insightText').textContent = `${scope[0].toUpperCase() + scope.slice(1)} bookings grew ${growth}% over the semester — a steady upward trend heading into exam-period recitals.`;
-      } else {
-        const minIdx = data.indexOf(Math.min(...data));
-        $('#kpi1Label').textContent = 'Most used';  $('#kpi1').textContent = d.short[maxIdx];
-        $('#kpi2Label').textContent = 'Least used'; $('#kpi2').textContent = d.short[minIdx];
-        $('#kpi3Label').textContent = 'Avg util.';  $('#kpi3').textContent = Math.round(avg) + '%';
-        $('#insightText').textContent = `${d.labels[maxIdx]} runs at ${data[maxIdx]}% on ${scope} while the ${d.labels[minIdx]} sits at ${data[minIdx]}% — a clear case for reallocating sessions.`;
-      }
-    }
-
-    function renderChart() {
-      if (typeof Chart === 'undefined') {
-        $('#sandboxChart').parentElement.innerHTML = '<p class="grid h-full place-items-center font-mono text-xs text-slate-400">Chart library failed to load.</p>';
+      if (!imgs.length) {
+        slides.innerHTML = placeholder('Add photos to CONFIG.images');
+        controls.forEach((q) => ($(q).hidden = true));
+        thumbs.hidden = true;
         return;
       }
-      const weekend = $('#weekendToggle').checked;
-      const d = SANDBOX[currentView];
-      const built = buildDataset(currentView, weekend);
-      const c = themeColors();
-      const horizontal = built.indexAxis === 'y';
 
-      if (chart) chart.destroy();
-      chart = new Chart($('#sandboxChart'), {
-        type: built.type,
-        data: { labels: d.labels, datasets: [{ label: d.unit, ...built.dataset }] },
-        options: {
-          indexAxis: built.indexAxis || 'x',
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: { duration: 700, easing: 'easeOutQuart' },
-          interaction: { mode: 'index', intersect: false },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              backgroundColor: c.tooltipBg, titleColor: c.tooltipText, bodyColor: c.tooltipText,
-              borderColor: c.tooltipBorder, borderWidth: 1, padding: 10, cornerRadius: 8, displayColors: false,
-              titleFont: { family: 'JetBrains Mono', size: 11 }, bodyFont: { family: 'JetBrains Mono', size: 12, weight: '600' },
-              callbacks: { label: (ctx) => `${ctx.parsed[horizontal ? 'x' : 'y']}${currentView === 'resource' ? '%' : ''} ${currentView === 'resource' ? 'utilization' : 'bookings'}` },
-            },
-          },
-          scales: {
-            x: {
-              grid: { display: horizontal, color: c.grid, drawTicks: false },
-              border: { display: false },
-              ticks: Object.assign(
-                { color: c.tick, font: { family: 'JetBrains Mono', size: 10 }, maxRotation: 0, autoSkipPadding: 8, padding: 6 },
-                horizontal ? { callback: (v) => v + '%' } : {}
-              ),
-              max: horizontal ? 100 : undefined, beginAtZero: true,
-            },
-            y: {
-              grid: { display: !horizontal, color: c.grid, drawTicks: false },
-              border: { display: false },
-              ticks: { color: c.tick, font: { family: 'JetBrains Mono', size: 10 }, padding: 8, maxTicksLimit: 5 },
-              beginAtZero: true,
-            },
-          },
-        },
+      slides.innerHTML = imgs.map((im, i) => `
+        <figure class="gallery-slide absolute inset-0 m-0 transition-opacity duration-700 ${i === 0 ? 'opacity-100' : 'opacity-0'}" aria-hidden="${i !== 0}">
+          <img src="${escapeHtml(im.src)}" alt="${escapeHtml(im.caption || 'Photo ' + (i + 1))}"
+            class="h-full w-full object-cover" ${i === 0 ? '' : 'loading="lazy"'} draggable="false" />
+        </figure>`).join('');
+
+      if (imgs.length > 1) {
+        thumbs.innerHTML = imgs.map((im, i) => `
+          <button type="button" data-go="${i}" aria-label="Show photo ${i + 1}"
+            class="gallery-thumb relative h-14 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition hover:opacity-100 sm:h-16 sm:w-24">
+            <img src="${escapeHtml(im.src)}" alt="" class="h-full w-full object-cover" loading="lazy" draggable="false" />
+          </button>`).join('');
+      } else {
+        controls.forEach((q) => ($(q).hidden = true));
+        thumbs.hidden = true;
+      }
+
+      // Missing files show a helpful placeholder instead of a broken-image icon
+      $$('img', slides).forEach((img) => img.addEventListener('error', () => {
+        img.parentElement.innerHTML = placeholder(img.getAttribute('src'));
+      }, { once: true }));
+      $$('img', thumbs).forEach((img) => img.addEventListener('error', () => {
+        const blank = document.createElement('span');
+        blank.className = 'block h-full w-full bg-slate-200 dark:bg-white/5';
+        img.replaceWith(blank);
+      }, { once: true }));
+
+      function show(n) {
+        idx = (n + imgs.length) % imgs.length;
+        $$('.gallery-slide', slides).forEach((el, i) => {
+          el.classList.toggle('opacity-100', i === idx);
+          el.classList.toggle('opacity-0', i !== idx);
+          el.setAttribute('aria-hidden', String(i !== idx));
+        });
+        $$('.gallery-thumb', thumbs).forEach((t, i) => {
+          const on = i === idx;
+          t.setAttribute('aria-current', String(on));
+          t.classList.toggle('border-emerald-500', on);
+          t.classList.toggle('border-transparent', !on);
+          t.classList.toggle('opacity-60', !on);
+        });
+        const im = imgs[idx];
+        $('#galleryCaption').textContent = im.caption || '';
+        $('#gallerySub').textContent = im.sub || '';
+        $('#galleryCount').textContent = `${idx + 1} / ${imgs.length}`;
+      }
+
+      const stop = () => { clearInterval(timer); timer = null; };
+      const start = () => {
+        stop();
+        if (imgs.length > 1 && CONFIG.autoplaySeconds > 0 && !reduceMotion) {
+          timer = setInterval(() => show(idx + 1), CONFIG.autoplaySeconds * 1000);
+        }
+      };
+      const go = (n) => { show(n); start(); };
+
+      $('#galleryPrev').addEventListener('click', () => go(idx - 1));
+      $('#galleryNext').addEventListener('click', () => go(idx + 1));
+      thumbs.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) go(+b.dataset.go); });
+      root.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
       });
-      updateKpis(currentView, weekend);
-    }
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
 
-    function updateChartTheme() { if (chart) renderChart(); }
-
-    function setView(view) {
-      currentView = view;
-      $$('.sandbox-tab').forEach((t) => {
-        const active = t.dataset.view === view;
-        t.setAttribute('aria-selected', String(active));
-        t.classList.toggle('bg-white', active);
-        t.classList.toggle('dark:bg-ink-700', active);
-        t.classList.toggle('shadow-sm', active);
-        t.classList.toggle('text-emerald-600', active);
-        t.classList.toggle('dark:text-emerald-400', active);
-        t.classList.toggle('text-slate-500', !active);
+      // Swipe on touch screens
+      let x0 = null;
+      root.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; stop(); }, { passive: true });
+      root.addEventListener('touchend', (e) => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1)); else start();
+        x0 = null;
       });
-      renderChart();
-    }
-    $$('.sandbox-tab').forEach((t) => t.addEventListener('click', () => setView(t.dataset.view)));
-    $('#weekendToggle').addEventListener('change', renderChart);
+
+      show(0);
+      start();
+    })();
 
     /* ---------------------------- Contact form ---------------------------- */
     $('#contactForm').addEventListener('submit', (e) => {
@@ -1060,14 +972,13 @@
 
     const followHost = () => {
       const dark = resolveTheme() === 'dark';
-      if (dark !== isDark()) { document.documentElement.classList.toggle('dark', dark); updateChartTheme(); }
+      if (dark !== isDark()) { document.documentElement.classList.toggle('dark', dark); }
     };
     if (window.matchMedia) matchMedia('(prefers-color-scheme: light)').addEventListener('change', followHost);
     new MutationObserver(followHost).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     /* ---------------------------- Init ---------------------------- */
     observeReveals();
-    setView('hourly');
   </script>
-
-</body></html>
+</body>
+</html>
